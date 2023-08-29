@@ -1,8 +1,9 @@
 // Variables of packages needed to be imported
 const express = require("express");
 const path = require("path");
+const uuid = require("./helpers/uuid");
+const noteData = require("./db/db.json");
 const app = express();
-const noteData = require("./db/db.json")
 // const fs = require("fs");
 
 // Port the Express.js server will run
@@ -20,6 +21,29 @@ app.get("/index", (req, res) => res.sendFile(path.join(__dirname, "public/index.
 
 // API route for db.json
 app.get("/api/notes", (req, res) => res.json(noteData));
+
+// POST request to add new note with note ID
+app.post("/api/notes", (req, res) => {
+    const { title, text } = req.body;
+    if (title && text) {
+        const newNote = {
+            title,
+            text,
+            noteID: uuid(),
+        };
+
+        const response = {
+            status: "success",
+            body: newNote,
+        };
+        
+        console.log(response);
+        res.status().json(response);
+
+    } else {
+        res.status().json("Error in posting note");
+    }
+})
 
 // listening for incoming connections on specified port
 app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));

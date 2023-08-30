@@ -5,7 +5,8 @@ const uuid = require("./helpers/uuid");
 const noteData = require("./db/db.json");
 const { readAndAppend } = require("./helpers/fsUtils");
 const app = express();
-// const fs = require("fs");
+const fs = require("fs");
+const util = require("util")
 
 // Port the Express.js server will run
 const PORT = 3001;
@@ -20,10 +21,15 @@ app.use(express.static("public"));
 
 app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "public/notes.html")));
 
+
 app.get("/index", (req, res) => res.sendFile(path.join(__dirname, "public/index.html")));
 
+const readFromFile = util.promisify(fs.readFile)
+
 // API route for db.json
-app.get("/api/notes", (req, res) => res.json(noteData));
+app.get("/api/notes", (req, res) => {
+    readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
+})
 
 // POST request to add new note with note ID
 app.post("/api/notes", (req, res) => {

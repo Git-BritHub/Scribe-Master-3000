@@ -39,19 +39,12 @@ app.post("/api/notes", (req, res) => {
         const newNote = {
             title,
             text,
-            noteID: uuid(),
-        };
-
-        const response = {
-            status: "success",
-            body: newNote,
+            id: uuid(),
         };
 
         readAndAppend(newNote, "./db/db.json");
-        
-        console.log(response);
-        res.status().json(response);
-
+    
+        res.status().json(newNote);
     } else {
         res.status().json("Error in posting note");
     }

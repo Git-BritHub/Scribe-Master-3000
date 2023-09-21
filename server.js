@@ -18,7 +18,7 @@ app.use(express.static("public"));
 
 app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "public/notes.html")));
 
-app.get("/index", (req, res) => res.sendFile(path.join(__dirname, "public/index.html")));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "public/index.html")));
 
 // API route for db.json
 app.get("/api/notes", (req, res) => {
@@ -46,7 +46,7 @@ app.post("/api/notes", (req, res) => {
 
 app.delete("/api/notes/:id", (req, res) => {
     readAndDelete(req.params.id, "./db/db.json")
-    res.json({ok: true})
+    res.json({ ok: true })
 });
 
 // listening for incoming connections on specified port

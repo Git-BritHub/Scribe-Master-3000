@@ -6,7 +6,7 @@ const { readAndAppend, readFromFile, readAndDelete } = require("./helpers/fsUtil
 const app = express();
 
 // Port the Express.js server will run
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Static middleware pointing to the public folder
 app.use(express.json());

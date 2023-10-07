@@ -22,6 +22,7 @@ Scribe Master 3000 is a note-taking app that uses an Express.js back end to save
 
 ## Usage
 Users can access Scribe Master 3000 at https://scribe-master-3000-production.up.railway.app/ or follow the installation steps above to access its repository.
+<img width="1512" alt="Screenshot of Scribemaster 3000 home page" src="https://github.com/Git-BritHub/Scribe-Master-3000/assets/130286884/cdea6088-87a6-4658-a09d-cec76ad55417">
 
 
 ## License
